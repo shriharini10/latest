@@ -1,0 +1,17 @@
+.container {
+    text-align: center;
+    padding: 20px;
+    font-family: Arial, sans-serif;
+}
+
+.welcomeMessage {
+    color: green;
+    font-size: 24px;
+    font-weight: bold;
+}
+
+.loginMessage {
+    color: red;
+    font-size: 18px;
+    font-style: italic;
+}
