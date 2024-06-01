@@ -1,62 +1,89 @@
-export default function Home() {
+'use client'
+import  data from './data.json'
+import { useState } from "react";
+
+const Home = () => {
+
+  const [d,newdata] = useState([]);
 
   const isUserLoggedIn = true;
 
   const userName = 'HARINI';
 
-  const bookList = [               //creating a list and rendering items
-        {
-            name:'Pride and Prejudice',
-            author:'Jane austen',
-            price:599
-        },
+  //console.log(data.bookList)  //displaying the contents of the json file
+  //console.table(data.bookList) //displaying the contents of the json file in a table
 
-        {
-            name:'The Hobbit',
-            author:'J.R.R. Tolkin',
-            price:699 
-        },
+  const books = data.bookList
+  //console.table(books) //displays a table of books from the definition
 
-        {
-            name:'Angels and Demons',
-            author:'Dan Brown',
-            price:599
-        }
-  ]
+  /*const getUsers = () => { // use of fetch and .then
+    const APIUrl = 'https://jsonplaceholder.typicode.com/albums/1'
 
-  const book = {
-        name:'Angels and Demons',
-        author:'Dan Brown',
-        price:599
-  };
+    const result = fetch(APIUrl)
+    .then(res => res.json())
+    .then(json => console.log(json))
+
+    return result
+
+  
+  };*/
+
+  const getUsers = async () => { // use of async await
+    const APIUrl = 'https://jsonplaceholder.typicode.com/albums'
+
+    const url = await fetch(APIUrl)
+    const result = await url.json()
+
+    const newdata1 = {
+      userId : 11, 
+      id : 101,
+      title : '500 days of summer'
+    }
+    result.push(newdata1) //use of push operator
+
+    const newdata2 = {
+      userId : 12, 
+      id : 102,
+      title : 'Two men in a boat'
+    }
     
-  console.log(bookList); // Rendering entire booklist
-  console.log(bookList[1]);// Rendering an item through indexing
-  console.log(bookList[2].author);// Rendering through member operator
+
+    const anotherdata = [...result, newdata2] //use of spread operator
+    newdata(anotherdata)  //updated state
+
+    localStorage.setItem('album', JSON.stringify(anotherdata)) // adding items to local storage
+    //console.table(JSON.parse(localStorage.getItem('album'))) //fetching items from local storage
+  
+  };
+
+  
+
+
 
   return (
 
 
     <div>
-      {isUserLoggedIn?<h1>Welcome {userName}</h1>:<p>PLEASE LOG IN❗</p>}
+      <center><strong>{isUserLoggedIn?<h1>Welcome {userName}</h1>:<p>PLEASE LOG IN❗</p>}</strong></center>
 
-      <div>
-        <h3>{book.name}</h3>
-        <h4>{book.author}</h4>
-        <h2>{book.price}</h2>
-      </div>
+
+      
 
       {
-        bookList.map(eachBook =>{
+        books.map((eachBook, index) =>{
           return(
-            <div>
+            <center key= {index}>
               <h3>{eachBook.name}</h3>
               <h4>{eachBook.author}</h4>
               <h2>{eachBook.price}</h2>
-            </div>
+            </center>
+           
           )
         })
       }
+      <center><button onClick={()=>{getUsers()}}>🆗</button></center>
     </div>
   );
-}
+};
+
+export default Home;
