@@ -1,0 +1,21 @@
+{
+    "bookList":  [
+        {
+            "name":"Pride and Prejudice",
+            "author":"Jane austen",
+            "price":599
+        },
+        
+        {
+            "name":"The Hobbit",
+            "author":"J.R.R. Tolkin",
+            "price":699
+        },
+        
+        {
+            "name":"Angels and Demons",
+            "author":"Dan Brown",
+            "price":599
+        }
+    ]
+}
